@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body onkeypress="myFunction(event)">
+
+<p>Press a key on the keyboard in the input field to get the Unicode character code of the pressed key.</p>
+
+<canvas onkeypress="myFunction(event)" width="50px" height="100px"></canvas>
+<p id="demo"></p>
+
+<p><strong>Note:</strong> The which property is not supported in IE8 and earlier versions.</p>
+
+<script>
+function myFunction(event) {
+  var x = event.which;
+  if(x == 119)
+  {
+  alert("hihi");
+  }
+  document.getElementById("demo").innerHTML = "The Unicode value is: " + x;
+}
+</script>
+
+</body>
+</html>
