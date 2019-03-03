@@ -1,14 +1,46 @@
 <html>
-    <head lang="en">
-        <meta charset="UTF-8">
-        <title>HTML5 Canvas Pokemon Game</title>
-        <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-        <script src="canvas.pokemon.js"></script>
-   
-        <link rel="stylesheet" href="./action.js">
 
-    </head>
-    <body>
-        <canvas id="canvas" width="460" height="460"></canvas>
-    </body>
-    </html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>HTML5 Canvas Pokemon Game</title>
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+
+
+    <link rel="stylesheet" href="./action.js">
+
+</head>
+
+<body>
+<button id="realLocation">vị trí của bạn </button>
+<button id="SaveLocation" style="display:none">xác nhận vị trí của bạn </button>
+<a id="joinGame"href="./index.html" style="display:none">vào game</a>
+</body>
+<script>
+    var latitude = 51.508742;
+    var longitude = -0.120850;
+    function showPosition(position) {
+        latitude = position.coords.latitude;
+        longitude = position.coords.longitude;
+        console.log(latitude + "  " + longitude + "ShowPosition")
+    }
+    function getLocation() {
+        if (navigator.geolocation) {
+            var data = navigator.geolocation.watchPosition(showPosition);
+
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    $("#SaveLocation").click(function(){
+        localStorage.setItem("latitude",latitude);
+        localStorage.setItem("longitude",longitude);
+        $("#joinGame").show();
+    })
+    $("#realLocation").click(function(){
+        getLocation();
+       
+        $("#SaveLocation").show();
+    })
+</script>
+
+</html>

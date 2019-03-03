@@ -1,18 +1,59 @@
 <!DOCTYPE html>
 <html>
-      <head>
-        <!-- Add Google API Key -->
-        <script src="http://maps.googleapis.com/maps/api/js?key=#{your_app_key}&sensor=false">
-        </script>
-        <script src="./PlayPokemon.js">
-        </script>
-        <script>
- 
-        </script>
-      </head>
 
-      <body>
-        <!-- Khai bao the div chua Map -->
-        <div id="googleMap" style="width:900px;height:900px;"></div>
-      </body>
+<head>
+  <!-- Add Google API Key -->
+  <script src="http://maps.googleapis.com/maps/api/js?key=#{your_app_key}&sensor=false">
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  </script>
+  <script>
+
+  </script>
+</head>
+
+<body>
+  <!-- Khai bao the div chua Map -->
+  <button id="YourLocation">lay vi tri cua ban</button>
+  <button id="Play" style="display:none">choi</button>
+  <div id="googleMap" style="width:900px;height:900px;"></div>
+</body>
+<script>
+  var latitude =localStorage.getItem("latitude");
+  var longitude = localStorage.getItem("longitude");
+  function showPosition(position) {
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+    console.log(latitude + "  " + longitude + "ShowPosition")
+  }
+  function getLocation() {
+    if (navigator.geolocation) {
+      var data = navigator.geolocation.watchPosition(showPosition);
+
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  }
+  function initialize() {
+    var mapProp = {
+      center: new google.maps.LatLng(latitude, longitude),
+      zoom: 20,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+  }
+  function getMap(){
+    console.log("im here")
+    google.maps.event.addDomListener(window, 'load', initialize);
+  }
+  getMap();
+  /////////////////////////
+  $("#YourLocation").click(function () {
+    getLocation();
+    $("#Play").show();
+    alert(latitude + "  " + longitude);
+  })
+</script>
+
 </html>
